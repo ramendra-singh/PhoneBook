@@ -1,0 +1,24 @@
+version: '2'
+services:
+
+  inventory:
+    build: source_code/.
+    ports:
+      - "5003:5002"
+    links:
+      - db
+    depends_on:
+      - db
+    environment:
+       MYSQL_ROOT_PASSWORD: admin1234
+       MYSQL_DATABASE: phone_dir
+       MYSQL_ROOT_USER: root
+
+  db:
+    build: database/.
+    volumes:
+      - /var/lib/mysql
+    environment:
+       MYSQL_ROOT_PASSWORD: admin1234
+       MYSQL_DATABASE: phone_dir
+       MYSQL_ROOT_USER: root
